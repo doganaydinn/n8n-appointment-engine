@@ -1,0 +1,408 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.4,
+      "position": [
+        -736,
+        48
+      ],
+      "id": "37398f17-abe2-42da-b9de-fa534b8f6e15",
+      "name": "When chat message received",
+      "webhookId": "be7d5345-0f45-47a2-a549-b000128325e8"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "applLogI7jYiKA4Lk",
+          "mode": "list",
+          "cachedResultName": "AI_Master_Database",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldEJYBeEbJAEq1a",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk/tbldEJYBeEbJAEq1a"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {
+            "Name": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Name', ``, 'string') }}",
+            "Telefon_No": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Telefon_No', ``, 'string') }}",
+            "Randevu_Tarihi": "={{ DateTime.fromFormat($fromAI(\"Randevu_Tarihi\"), \"yyyy-MM-dd HH:mm\", { zone: \"Europe/Istanbul\" }).toUTC().toISO() }}\n"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Telefon_No",
+              "displayName": "Telefon_No",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Randevu_Tarihi",
+              "displayName": "Randevu_Tarihi",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        416,
+        224
+      ],
+      "id": "1cf92779-a233-4eaf-93b8-c3e1418c67ef",
+      "name": "create_appointment",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BUMFaqTWYbPAsZlA",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "deleteRecord",
+        "base": {
+          "__rl": true,
+          "value": "applLogI7jYiKA4Lk",
+          "mode": "list",
+          "cachedResultName": "AI_Master_Database",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldEJYBeEbJAEq1a",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk/tbldEJYBeEbJAEq1a"
+        },
+        "id": "={{ $fromAI('Record_ID', '', 'string') }}\n"
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        240,
+        224
+      ],
+      "id": "768fe936-4d76-41f0-875e-d7dfb7730aa3",
+      "name": "Delete a record in Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BUMFaqTWYbPAsZlA",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "\"Müşterinin istediği tarih ve saatte randevu olup olmadığını kontrol etmek için bu aracı kullan.\"",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "applLogI7jYiKA4Lk",
+          "mode": "list",
+          "cachedResultName": "AI_Master_Database",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldEJYBeEbJAEq1a",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk/tbldEJYBeEbJAEq1a"
+        },
+        "filterByFormula": "={{ $fromAI('Filter_By_Formula', ``, 'string') }}",
+        "returnAll": false,
+        "limit": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        80,
+        224
+      ],
+      "id": "44aaf2d2-49ae-4eb0-9173-9c4a0c3cabe1",
+      "name": "Search_By_Date",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BUMFaqTWYbPAsZlA",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "numberInputs": 3
+      },
+      "type": "n8n-nodes-base.merge",
+      "typeVersion": 3.2,
+      "position": [
+        -464,
+        32
+      ],
+      "id": "29180c7c-f36a-48dc-8139-8c7615261dd7",
+      "name": "Merge"
+    },
+    {
+      "parameters": {
+        "descriptionType": "manual",
+        "toolDescription": "\"Müşterinin istediği tarih ve saatte randevu olup olmadığını kontrol etmek için bu aracı kullan.\"",
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "applLogI7jYiKA4Lk",
+          "mode": "list",
+          "cachedResultName": "AI_Master_Database",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldEJYBeEbJAEq1a",
+          "mode": "list",
+          "cachedResultName": "Table 1",
+          "cachedResultUrl": "https://airtable.com/applLogI7jYiKA4Lk/tbldEJYBeEbJAEq1a"
+        },
+        "filterByFormula": "=AND(\n  {Randevu_Tarihi} = \"{{ $json.Randevu_Tarihi }}\"\n)\n",
+        "returnAll": false,
+        "limit": 1,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        -80,
+        224
+      ],
+      "id": "65c90473-a877-46f5-90f6-430e4ce38494",
+      "name": "Search records in Airtable",
+      "credentials": {
+        "airtableTokenApi": {
+          "id": "BUMFaqTWYbPAsZlA",
+          "name": "Airtable Personal Access Token account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "model": "llama-3.1-8b-instant",
+        "options": {
+          "temperature": 0
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -304,
+        224
+      ],
+      "id": "dbfa2b98-0707-4b03-bef8-030199c09226",
+      "name": "Groq Chat Model4",
+      "credentials": {
+        "groqApi": {
+          "id": "iHqXdoF0gXEXfbf3",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $json.sessionId }}",
+        "contextWindowLength": 20
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        -208,
+        368
+      ],
+      "id": "a4a1605f-fa29-4555-b00c-fc40388a6125",
+      "name": "Simple Memory4"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.chatInput }}",
+        "options": {
+          "systemMessage": "=Kimlik: Sen profesyonel, nazik ve çok yetenekli bir randevu asistanısın. Tüm randevu işlemlerini (Kayıt, Silme, Sorgulama) tek başına yönetiyorsun.\n\n1. Randevu Oluşturma (Create):\n\nKullanıcı \"randevu oluştur\" veya \"kayıt\" derse: \"Tabii ki, hangi tarih ve saat için istersiniz?\" diyerek başla.\n\nSıralama: Önce Tarih/Saat, sonra İsim-Soyisim, en son Telefon al.\n\nHata Önleme: Bu 3 bilgi tam olmadan create_appointment tool'unu ASLA tetikleme.\n\nZaman Hesabı: Bugün: {{ $now.format('DD/MM/YY') }}. \"Salı 13:00\" gibi ifadeleri bu tarihe göre en yakın gelecekteki güne hesapla (İstanbul Saati UTC+3). Format: GG/AA/YY SS:dakika.\n\n2. Randevu Silme/İptal (Delete):\n\nİsim-Soyisim iste. search_record ile kaydı bul.\n\nKullanıcı \"sefa keles\" yazsa bile tool'daki doğru halini (Sefa Keleş) bul ve: \"[Doğru İsim]'in randevusunu siliyorum, onaylıyor musunuz?\" diye sor. Onay almadan delete_record kullanma.\n\n3. Randevu Sorgulama (Search):\n\nSadece İsim-Soyisim al ve search_record tool'u ile tarihi bulup kullanıcıya nazikçe söyle.\n\n4. Genel Kurallar:\n\nAlakasız bir şey yazılırsa (sohbet vb.) insani ve kısa bir cevap ver, sonra asıl görevine sadık kal.\n\nTeknik terimleri (record ID, tool, null vb.) asla kullanıcıya gösterme.\n\nGeçmiş tarihe randevu alma."
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        -304,
+        48
+      ],
+      "id": "5f52ef98-8aec-44a7-b8ab-f443ce89bf5e",
+      "name": "ai asistan"
+    },
+    {
+      "parameters": {
+        "resource": "chat"
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -736,
+        240
+      ],
+      "id": "1c00684f-b89d-4358-a4a2-17094f89bc70",
+      "name": "Get a chat",
+      "webhookId": "db247232-5633-484e-9e24-411f251d98bf",
+      "credentials": {
+        "telegramApi": {
+          "id": "fuRQsPSs5W5y7Jdt",
+          "name": "Telegram account"
+        }
+      }
+    }
+  ],
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 1
+          }
+        ]
+      ]
+    },
+    "create_appointment": {
+      "ai_tool": [
+        [
+          {
+            "node": "ai asistan",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete a record in Airtable": {
+      "ai_tool": [
+        [
+          {
+            "node": "ai asistan",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search_By_Date": {
+      "ai_tool": [
+        [
+          {
+            "node": "ai asistan",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge": {
+      "main": [
+        [
+          {
+            "node": "ai asistan",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search records in Airtable": {
+      "ai_tool": [
+        [
+          {
+            "node": "ai asistan",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model4": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "ai asistan",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory4": {
+      "ai_memory": [
+        [
+          {
+            "node": "ai asistan",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "ai asistan": {
+      "main": [
+        []
+      ]
+    },
+    "Get a chat": {
+      "main": [
+        [
+          {
+            "node": "Merge",
+            "type": "main",
+            "index": 2
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "3f6a6b50b39249c564cb4c90b1e6db47a56d2f8eb8fb84b89ecc02e5e22274b6"
+  }
+}
